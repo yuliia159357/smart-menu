@@ -1,0 +1,26 @@
+@import '../../styles/vars.module'
+
+.label
+    color: $text
+    width: 100%
+    transition: .3s
+    font-size: rem(18px)
+    display: flex
+    flex-direction: column
+    font-family: 'Roboto', sans-serif
+    span
+        display: block
+    &:hover
+        color: $primary
+    input
+        margin-top: 6px
+        padding: 5px
+        outline: 0
+        background-color: $back
+        border: 1px solid $text
+        border-radius: 6px
+        transition: .3s
+        color: $primary
+        &:focus
+            border: 1px solid $primary
+

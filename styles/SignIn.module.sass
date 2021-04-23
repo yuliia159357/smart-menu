@@ -1,0 +1,74 @@
+@import './vars.module'
+
+.authContainer
+    padding: 0 50px 0 30px
+    min-height: 100vh
+    background-color: $back
+    display: flex
+    align-items: center
+    justify-content: space-around
+    p
+        color: $text
+        font-family: 'Roboto', sans-serif
+        font-size: rem(18px)
+        margin-right: 8px
+    a
+        text-decoration: none
+        font-size: rem(18px)
+        color: $link
+        transition: .3s
+        &:hover
+            color: $secondary
+
+.logoContainer, .authContainer
+    h1
+        width: 100%
+        text-align: center
+        text-transform: uppercase
+        font-size: rem(45px)
+        color: $primary
+    &:hover
+        cursor: default
+
+.formContainer
+    display: flex
+    align-items: center
+    justify-content: space-around
+    flex-direction: column
+    min-width: 320px
+    max-width: 450px
+    min-height: 450px
+    width: 100%
+
+.forLinks
+    display: flex
+    align-items: center
+    justify-content: center
+    svg
+        path
+            transition: .3s
+        &:hover
+            path
+                fill: $secondary
+
+.formFooter
+    display: flex
+    align-items: center
+    justify-content: space-around
+    flex-direction: column
+    width: 100%
+    min-height: 170px
+    &:nth-child(2)
+        margin-top: 10px
+        
+.buttonContainer
+    margin: 15px 0 5px 0
+
+.logoContainer
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    border-right: 1px solid $primary
+    height: calc( 100vh - 200px )
+    padding-right: 200px
