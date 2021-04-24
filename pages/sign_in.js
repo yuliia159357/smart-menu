@@ -14,8 +14,6 @@ const sign_in = () => {
 
     const [UserLogin] = useState({})
 
-    // const UserLogin = {}
-
     const inputs = [
         {
             type: 'email',
@@ -33,12 +31,14 @@ const sign_in = () => {
 
     //Functions
 
-    const getInputValues = e => {
-        UserLogin[e.target.name] = e.target.value
+    const getInputValues = e => UserLogin[e.target.name] = e.target.value
 
-        console.log(UserLogin)
+    const submitSignIn = (e) => {
+        e.preventDefault()
+        // fetch('/api/getUsers')
+        //     .then(response => response.json())
+        //     .then(users => console.log(users))
     }
-
 
     //Return
 
@@ -57,7 +57,7 @@ const sign_in = () => {
                 <h1>smart menu</h1>
             </div>
             
-            <form action="" className={styles.formContainer}>
+            <form action="" className={styles.formContainer} onSubmit={submitSignIn}>
                 <h1>sign in</h1>
                 {
                     inputs.map(({type, label, placeholder, name}, key) => (

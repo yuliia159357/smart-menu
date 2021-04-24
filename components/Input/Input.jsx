@@ -1,23 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import styles from './Input.module.sass'
 
 const Input = ({type, label, placeholder, customClass='label', name, changeHandler}) => {
-
+    const [Focus, setFocus] = useState(false)
     return(
-        (
-
-            <label htmlFor="" className={styles[customClass]}>
-                <span>{label}</span>
-                <input
-                    type={type || 'text'}
-                    placeholder={placeholder}
-                    name={name}
-                    onChange={(e) => changeHandler(e)}
-                    autoComplete = 'off'
-                />
-            </label>
-        )
+        <label htmlFor="" className={styles[customClass]}>
+            <span style={{color: Focus === name ? '#FDC029' : '#BCB6AE'}}>{label}</span>
+            <input
+                type={type || 'text'}
+                placeholder={placeholder}
+                name={name}
+                onChange={(e) => changeHandler(e)}
+                onFocus={(e) => setFocus(e.currentTarget.name)}
+                onBlur={() => setFocus(null)}
+                autoComplete = 'off'
+            />
+        </label>
     )
 }
 

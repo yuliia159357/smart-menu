@@ -4,6 +4,7 @@ import Button from '../components/Button/Button'
 import Input from '../components/Input/Input'
 import TurnBack from '../components/TurnBack/TurnBack'
 import Link from 'next/link'
+import validation from '../middlewares/validation'
 
 const sign_in = () => {
     const turnLinkLeft = {
@@ -13,7 +14,7 @@ const sign_in = () => {
 
     //variables
 
-    const [UserLogin] = useState({})
+    const [UserLogin, setUserLogin] = useState({})
 
     const inlineStylesFormContainer = {
         minHeight: '520px'
@@ -36,7 +37,7 @@ const sign_in = () => {
         },
         {
             type: 'password',
-            name: 'userPassword',
+            name: 'userPasswordRepeat',
             label: 'Repeat password',
             placeholder: 'qwerty123'
         }
@@ -46,10 +47,44 @@ const sign_in = () => {
 
     const getInputValues = e => {
         UserLogin[e.target.name] = e.target.value
-
-        console.log(UserLogin)
     }
 
+    const setNewUser = (e) => {
+        e.preventDefault()
+        if (!validation.isUndefind([UserLogin.userEmail, UserLogin.userPassword, UserLogin.userPasswordRepeat])) {
+            alert('trouble undefined')
+            e.target.reset()
+            setUserLogin({})
+            return false
+        }
+        if (!validation.isEqual(UserLogin.userPassword, UserLogin.userPasswordRepeat)) {
+            alert('trouble equal')
+            e.target.reset()
+            setUserLogin({})
+            return false
+        }
+        if (!validation.isEmptyString([UserLogin.userEmail, UserLogin.userPassword, UserLogin.userPasswordRepeat])) {
+            alert('trouble emptyString')
+            e.target.reset()
+            setUserLogin({})
+            return false
+        }
+       
+        
+        const newUser = {
+            email: UserLogin.userEmail,
+            password: UserLogin.userPassword
+        }
+        fetch('/api/setUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(response => response.json())
+            .then(users => console.log(users))
+    }
 
     //Return
 
@@ -68,7 +103,7 @@ const sign_in = () => {
                 <h1>smart menu</h1>
             </div>
             
-            <form action="" className={styles.formContainer} style={inlineStylesFormContainer}>
+            <form action="" className={styles.formContainer} style={inlineStylesFormContainer} onSubmit={setNewUser}>
                 <h1>sign up</h1>
                 {
                     inputs.map(({type, label, placeholder, name}, key) => (
